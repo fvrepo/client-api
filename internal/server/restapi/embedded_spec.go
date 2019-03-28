@@ -133,10 +133,6 @@ func init() {
           "description": "port name",
           "type": "string"
         },
-        "pinCode": {
-          "description": "pin code",
-          "type": "string"
-        },
         "province": {
           "description": "port province",
           "type": "string"
@@ -275,10 +271,6 @@ func init() {
         },
         "name": {
           "description": "port name",
-          "type": "string"
-        },
-        "pinCode": {
-          "description": "pin code",
           "type": "string"
         },
         "province": {

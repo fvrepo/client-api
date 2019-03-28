@@ -57,9 +57,6 @@ definitions:
         items:
           type: number
           format: float64
-      pinCode:
-        type: string
-        description: pin code
       city:
         type: string
         description: port city
@@ -87,6 +84,7 @@ definitions:
       code:
         type: string
         description: port country
+
 
   Error:
     type: object

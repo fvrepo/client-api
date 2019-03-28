@@ -33,9 +33,6 @@ type Port struct {
 	// port name
 	Name string `json:"name,omitempty"`
 
-	// pin code
-	PinCode string `json:"pinCode,omitempty"`
-
 	// port province
 	Province string `json:"province,omitempty"`
 
