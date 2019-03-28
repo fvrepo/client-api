@@ -4,14 +4,14 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/onetwoclimb/cmd/server"
+	"github.com/client-api/cmd/server"
 )
 
 var l = logrus.New()
 
 var RootCmd = &cobra.Command{
-	Use:   "OneTwoClimbAPI",
-	Short: "OneTwoClimb swagger API",
+	Use:   "client-api",
+	Short: "ClientAPI swagger API",
 }
 
 func Execute() {

@@ -24,7 +24,7 @@ func init() {
 }
 
 var Cmd = &cobra.Command{
-	Use:   "client-api",
+	Use:   "server",
 	Short: "run server",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		utils.BindEnv(cmd)
