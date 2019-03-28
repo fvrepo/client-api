@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  title: Client API
+  version: '1.0'
+basePath: /api/v1.0
+schemes:
+  - http
+
+paths:
+  /ports:
+    get:
+      summary: get ports
+      operationId: getAllPorts
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+              $ref: "#/definitions/Port"
+        500:
+          description: General server error
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      summary: post ports
+      operationId: postPorts
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: file
+          in: formData
+          description: The file to upload
+          type: file
+      responses:
+        200:
+          description: OK
+        500:
+          description: General server error
+          schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+  Port:
+    description: port object
+    type: object
+    properties:
+      name:
+        type: string
+        description: port name
+      coordinates:
+        type: array
+        description: port coordinates
+        items:
+          type: number
+          format: float64
+      pinCode:
+        type: string
+        description: pin code
+      city:
+        type: string
+        description: port city
+      province:
+        type: string
+        description: port province
+      country:
+        type: string
+        description: port country
+      alias:
+        type: array
+        items:
+          type: string
+      regions:
+        type: array
+        items:
+          type: string
+      timezone:
+        type: string
+        description: port timezone
+      unlocs:
+        type: array
+        items:
+          type: string
+      code:
+        type: string
+        description: port country
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: internal status code
+      message:
+        type: string
+    required:
+      - code
+      - message
+

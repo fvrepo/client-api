@@ -1,0 +1,16 @@
+required = [
+    "github.com/go-swagger/go-swagger/cmd/swagger",
+    "github.com/golangci/golangci-lint/cmd/golangci-lint",
+]
+
+[[constraint]]
+  version = "v1.12.5"
+  name = "github.com/golangci/golangci-lint"
+
+[[override]]
+  version = "v0.17.0"
+  name = "github.com/go-swagger/go-swagger"
+
+[prune]
+  go-tests = true
+  unused-packages = true
