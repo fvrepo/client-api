@@ -72,7 +72,7 @@ fmt:
 
 build:
 	@echo $(GREEN_COLOR)[build]$(DEFAULT_COLOR)
-	CGO_ENABLED=1 $(GOBUILD) --tags static -o $(BINARY)
+	$(GOBUILD) --tags static -o $(BINARY)
 
 version:
 	@echo $(GREEN_COLOR)[version]$(DEFAULT_COLOR)
@@ -101,7 +101,7 @@ endif
 
 swaggerdoc: swagger
 	@echo $(GREEN_COLOR)[doc]$(DEFAULT_COLOR)
-	@$(SWAGGER) serve --flavor=swagger $(BASEPATH)/api/spec.yaml
+	@./bin/$(SWAGGER) serve --flavor=swagger $(BASEPATH)/api/spec.yaml
 
 generate:
 	@mkdir -p ./bin
