@@ -34,9 +34,10 @@ var Cmd = &cobra.Command{
 		l.Info("start ClientApi server")
 		defer l.Info("stop ClientApi server")
 
-		conn, err := grpc.Dial(cfg.PortDomainServer)
+		conn, err := grpc.Dial(cfg.PortDomainServer, grpc.WithInsecure())
 		if err != nil {
 			l.WithError(err).Error("failed to connect to port domain gRPC server")
+			return errors.WithStack(err)
 		}
 		defer conn.Close()
 		client := portApi.NewPortServiceClient(conn)
