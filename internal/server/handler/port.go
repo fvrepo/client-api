@@ -5,11 +5,12 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/client-api/internal/server/models"
 	"github.com/client-api/internal/server/restapi/operations"
-	portApi "github.com/port-domain/pkg/grpcapi/port"
+	portApi "github.com/fvrepo/port-domain/pkg/grpcapi/port"
 )
 
 func (h *Handler) GetAllPorts(params operations.GetAllPortsParams) middleware.Responder {
@@ -37,6 +38,8 @@ func (h *Handler) PostPorts(params operations.PostPortsParams) middleware.Respon
 		if err := h.parsePortsJson(lr, pr); err != nil {
 			return err
 		}
+		close(pr)
+		return nil
 	})
 
 	for i := 0; i < h.config.Workers; i++ {
@@ -56,14 +59,14 @@ func (h *Handler) PostPorts(params operations.PostPortsParams) middleware.Respon
 	return operations.NewPostPortsOK()
 }
 
-func (h *Handler) parsePortsJson(lr *io.LimitedReader, pr chan *portApi.SavePortRequest) middleware.Responder {
+func (h *Handler) parsePortsJson(lr *io.LimitedReader, pr chan *portApi.SavePortRequest) error {
 	dec := json.NewDecoder(lr)
 
 	// read open bracket
 	_, err := dec.Token()
 	if err != nil {
 		l.WithError(err).Error("failed to read JSON start token")
-		return operations.NewPostPortsBadRequest().WithPayload(&models.Error{Code: 400, Message: "invalid JSON file"})
+		return errors.WithStack(err)
 	}
 
 	// while the array contains values

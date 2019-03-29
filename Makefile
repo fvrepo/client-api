@@ -31,7 +31,7 @@ GREEN_COLOR   = "\033[0;32m"
 PURPLE_COLOR  = "\033[0;35m"
 DEFAULT_COLOR = "\033[m"
 
-all: clean fmt swagger build test
+all: clean fmt swagger build
 
 help:
 	@echo 'Usage: make <TARGETS> ... <OPTIONS>'

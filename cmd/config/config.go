@@ -25,8 +25,8 @@ type ServerConfig struct {
 func (c *Config) Flags() *pflag.FlagSet {
 	f := pflag.NewFlagSet("APIConfig", pflag.PanicOnError)
 
-	f.StringVar(&c.Host, "host", "127.0.0.1", "ip")
-	f.IntVar(&c.Port, "port", 8081, "port")
+	f.StringVar(&c.Host, "host", "0.0.0.0", "ip")
+	f.IntVar(&c.Port, "port", 80, "port")
 	f.DurationVar(&c.ReadTimeout, "readtimeout", time.Duration(0), "api read timeout (default 0s)")
 	f.DurationVar(&c.WriteTimeout, "writetimeout", time.Duration(0), "api write timeout (default 0s)")
 	f.IntVar(&c.MaxFileSize, "max_file_size", 20000000, "max file size")

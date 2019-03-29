@@ -5,7 +5,7 @@ import (
 
 	"github.com/client-api/cmd/config"
 	"github.com/client-api/internal/server/restapi/operations"
-	portApi "github.com/port-domain/pkg/grpcapi/port"
+	portApi "github.com/fvrepo/port-domain/pkg/grpcapi/port"
 )
 
 var l = logrus.New()

@@ -14,7 +14,7 @@ import (
 	"github.com/client-api/internal/server/restapi"
 	"github.com/client-api/internal/server/restapi/operations"
 	"github.com/client-api/internal/utils"
-	portApi "github.com/port-domain/pkg/grpcapi/port"
+	portApi "github.com/fvrepo/port-domain/pkg/grpcapi/port"
 )
 
 var cfg config.Config

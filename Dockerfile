@@ -10,7 +10,7 @@ COPY ./vendor ./vendor
 COPY Makefile ./main.go ./
 
 RUN make build && \
-    cp ./port /usr/local/bin/ && \
+    cp ./client-api /usr/local/bin/ && \
     rm -rf /go/src/github.com
 
 WORKDIR /usr/local/bin/
