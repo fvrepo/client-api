@@ -47,6 +47,7 @@ help:
 	@echo '    version            Print Go version.'
 	@echo '    swagger            Generate swagger models and server'
 	@echo '    swaggerdoc         Serve swagger doc'
+	@echo `    generate           Generate mocks
 	@echo ''
 	@echo 'Targets run by default are: clean fmt lint test.'
 	@echo ''
@@ -101,3 +102,12 @@ endif
 swaggerdoc: swagger
 	@echo $(GREEN_COLOR)[doc]$(DEFAULT_COLOR)
 	@$(SWAGGER) serve --flavor=swagger $(BASEPATH)/api/spec.yaml
+
+generate:
+	@mkdir -p ./bin
+ifeq ("$(wildcard ./bin/mockery)","")
+	@echo $(PURPLE_COLOR)[build mockery]$(DEFAULT_COLOR)
+	@$(GOBUILD) -o ./bin/mockery ./vendor/github.com/vektra/mockery/cmd/mockery/
+endif
+	@echo $(GREEN_COLOR)[generate]$(DEFAULT_COLOR)
+	@$(GOGENERATE) $(PKGS)

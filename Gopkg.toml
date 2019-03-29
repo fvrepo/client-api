@@ -2,6 +2,7 @@ required = [
     "github.com/go-swagger/go-swagger/cmd/swagger",
     "github.com/fvrepo/port-domain/pkg/grpcapi/port",
     "github.com/golangci/golangci-lint/cmd/golangci-lint",
+    "github.com/vektra/mockery/cmd/mockery",
 ]
 
 [[constraint]]

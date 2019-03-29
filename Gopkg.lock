@@ -79,7 +79,7 @@
   name = "github.com/fvrepo/port-domain"
   packages = ["pkg/grpcapi/port"]
   pruneopts = "UT"
-  revision = "163af3e84e51565b6cfe343e895ea8a1965a153a"
+  revision = "f0a85865de3ee6d93e6a72c77317a616b7d92556"
 
 [[projects]]
   branch = "master"
@@ -775,6 +775,17 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:5ed88c68e8ff11e085ec406c214dbbd94ca2dd52143e00c8e86c78d880576188"
+  name = "github.com/vektra/mockery"
+  packages = [
+    "cmd/mockery",
+    "mockery",
+  ]
+  pruneopts = "UT"
+  revision = "e78b021dcbb558a8e7ac1fc5bc757ad7c277bb81"
+
+[[projects]]
+  branch = "master"
   digest = "1:bbe51412d9915d64ffaa96b51d409e070665efc5194fcf145c4a27d4133107a4"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
@@ -783,9 +794,10 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d11ed6520719cecb0db83b418b33412466cbeaa955a1dbde6c1e3eb13b850291"
+  digest = "1:ece18bebf37543e3ea16619bd9bd2b36dcec7bffa9008598dd8c4fe7803a5797"
   name = "golang.org/x/net"
   packages = [
+    "context",
     "http/httpguts",
     "http2",
     "http2/hpack",
@@ -982,6 +994,7 @@
     "github.com/sirupsen/logrus",
     "github.com/spf13/cobra",
     "github.com/spf13/pflag",
+    "github.com/vektra/mockery/cmd/mockery",
     "golang.org/x/net/netutil",
     "golang.org/x/sync/errgroup",
     "google.golang.org/grpc",

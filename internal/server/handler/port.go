@@ -30,7 +30,6 @@ func (h *Handler) PostPorts(params operations.PostPortsParams) middleware.Respon
 	lr := &io.LimitedReader{N: int64(h.config.MaxFileSize), R: params.File}
 	pr := make(chan *portApi.SavePortRequest, h.config.Workers)
 	g, gctx := errgroup.WithContext(params.HTTPRequest.Context())
-
 	g.Go(func() error {
 		defer close(pr)
 		if err := h.parsePortsJson(lr, pr); err != nil {
@@ -66,7 +65,7 @@ func (h *Handler) parsePortsJson(lr *io.LimitedReader, pr chan *portApi.SavePort
 		return errors.WithStack(err)
 	}
 
-	// while the array contains values
+	// while the object contains values
 	for dec.More() {
 		// read port id
 		t, err := dec.Token()
