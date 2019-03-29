@@ -47,9 +47,9 @@ help:
 	@echo '    version            Print Go version.'
 	@echo '    swagger            Generate swagger models and server'
 	@echo '    swaggerdoc         Serve swagger doc'
-	@echo `    generate           Generate mocks
+	@echo '    generate           Generate mocks'
 	@echo ''
-	@echo 'Targets run by default are: clean fmt lint test.'
+	@echo 'Targets run by default are: clean fmt swagger build.'
 	@echo ''
 
 clean:
