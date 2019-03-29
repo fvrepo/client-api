@@ -32,7 +32,7 @@ func (c *Config) Flags() *pflag.FlagSet {
 	f.IntVar(&c.MaxFileSize, "max_file_size", 20000000, "max file size")
 	f.IntVar(&c.Workers, "workers", 10, "upload max workers count")
 
-	f.StringVar(&c.PortDomainServer, "port_domain_server", "127.0.0.1:8000", "PortDomain address in format host:port")
+	f.StringVar(&c.PortDomainServer, "port_domain_server", "0.0.0.0:8000", "PortDomain address in format host:port")
 
 	return f
 }
