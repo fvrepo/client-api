@@ -29,16 +29,13 @@ func (h *Handler) PostPorts(params operations.PostPortsParams) middleware.Respon
 
 	lr := &io.LimitedReader{N: int64(h.config.MaxFileSize), R: params.File}
 	pr := make(chan *portApi.SavePortRequest, h.config.Workers)
-	defer func() {
-		close(pr)
-	}()
 	g, gctx := errgroup.WithContext(params.HTTPRequest.Context())
 
 	g.Go(func() error {
+		defer close(pr)
 		if err := h.parsePortsJson(lr, pr); err != nil {
 			return err
 		}
-		close(pr)
 		return nil
 	})
 
