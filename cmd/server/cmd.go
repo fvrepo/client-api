@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
 
 	"github.com/client-api/cmd/config"
 	"github.com/client-api/internal/server/handler"
@@ -13,6 +14,7 @@ import (
 	"github.com/client-api/internal/server/restapi"
 	"github.com/client-api/internal/server/restapi/operations"
 	"github.com/client-api/internal/utils"
+	portApi "github.com/port-domain/pkg/grpcapi/port"
 )
 
 var cfg config.Config
@@ -31,6 +33,13 @@ var Cmd = &cobra.Command{
 
 		l.Info("start ClientApi server")
 		defer l.Info("stop ClientApi server")
+
+		conn, err := grpc.Dial(cfg.PortDomainServer)
+		if err != nil {
+			l.WithError(err).Error("failed to connect to port domain gRPC server")
+		}
+		defer conn.Close()
+		client := portApi.NewPortServiceClient(conn)
 
 		// load embedded swagger file
 		swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
@@ -53,7 +62,7 @@ var Cmd = &cobra.Command{
 		server.ReadTimeout = cfg.ReadTimeout
 		server.WriteTimeout = cfg.WriteTimeout
 
-		handler.New(cfg).ConfigureHandlers(api)
+		handler.New(cfg, client).ConfigureHandlers(api)
 
 		server.SetHandler(serverMW.PanicRecovery(serverMW.Logger(api.Serve(middleware.PassthroughBuilder))))
 
@@ -61,7 +70,6 @@ var Cmd = &cobra.Command{
 		if err := server.Serve(); err != nil {
 			return errors.WithStack(err)
 		}
-
 		return nil
 	},
 }

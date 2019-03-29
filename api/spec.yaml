@@ -13,6 +13,9 @@ paths:
       operationId: getAllPorts
       produces:
         - application/json
+      parameters:
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/cursor'
       responses:
         200:
           description: OK
@@ -38,6 +41,10 @@ paths:
       responses:
         200:
           description: OK
+        400:
+          description: Bad Argument
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: General server error
           schema:
@@ -56,7 +63,7 @@ definitions:
         description: port coordinates
         items:
           type: number
-          format: float64
+          format: float
       city:
         type: string
         description: port city
@@ -94,7 +101,19 @@ definitions:
         description: internal status code
       message:
         type: string
-    required:
-      - code
-      - message
 
+parameters:
+  limit:
+    name: limit
+    in: query
+    type: integer
+    description: number of elements to return.
+    allowEmptyValue: true
+    default: 10
+  cursor:
+    name: skip
+    in: query
+    type: integer
+    description: number of elements to skip
+    allowEmptyValue: true
+    default: 0

@@ -35,6 +35,14 @@ func init() {
         ],
         "summary": "get ports",
         "operationId": "getAllPorts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/cursor"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -72,6 +80,12 @@ func init() {
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Argument",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "500": {
             "description": "General server error",
             "schema": {
@@ -85,10 +99,6 @@ func init() {
   "definitions": {
     "Error": {
       "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
           "description": "internal status code",
@@ -122,7 +132,7 @@ func init() {
           "type": "array",
           "items": {
             "type": "number",
-            "format": "float64"
+            "format": "float"
           }
         },
         "country": {
@@ -154,6 +164,24 @@ func init() {
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "cursor": {
+      "type": "integer",
+      "default": 0,
+      "description": "number of elements to skip",
+      "name": "skip",
+      "in": "query",
+      "allowEmptyValue": true
+    },
+    "limit": {
+      "type": "integer",
+      "default": 10,
+      "description": "number of elements to return.",
+      "name": "limit",
+      "in": "query",
+      "allowEmptyValue": true
     }
   }
 }`))
@@ -175,6 +203,24 @@ func init() {
         ],
         "summary": "get ports",
         "operationId": "getAllPorts",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 10,
+            "description": "number of elements to return.",
+            "name": "limit",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "number of elements to skip",
+            "name": "skip",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -212,6 +258,12 @@ func init() {
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Argument",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
           "500": {
             "description": "General server error",
             "schema": {
@@ -225,10 +277,6 @@ func init() {
   "definitions": {
     "Error": {
       "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
           "description": "internal status code",
@@ -262,7 +310,7 @@ func init() {
           "type": "array",
           "items": {
             "type": "number",
-            "format": "float64"
+            "format": "float"
           }
         },
         "country": {
@@ -294,6 +342,24 @@ func init() {
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "cursor": {
+      "type": "integer",
+      "default": 0,
+      "description": "number of elements to skip",
+      "name": "skip",
+      "in": "query",
+      "allowEmptyValue": true
+    },
+    "limit": {
+      "type": "integer",
+      "default": 10,
+      "description": "number of elements to return.",
+      "name": "limit",
+      "in": "query",
+      "allowEmptyValue": true
     }
   }
 }`))

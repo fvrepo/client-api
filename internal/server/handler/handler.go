@@ -1,19 +1,22 @@
 package handler
 
 import (
+	"github.com/sirupsen/logrus"
+
 	"github.com/client-api/cmd/config"
 	"github.com/client-api/internal/server/restapi/operations"
-	"github.com/sirupsen/logrus"
+	portApi "github.com/port-domain/pkg/grpcapi/port"
 )
 
 var l = logrus.New()
 
 type Handler struct {
 	config config.Config
+	port   portApi.PortServiceClient
 }
 
-func New(config config.Config) *Handler {
-	return &Handler{config: config}
+func New(config config.Config, port portApi.PortServiceClient) *Handler {
+	return &Handler{config: config, port: port}
 }
 
 // todo add internal error codes

@@ -9,11 +9,18 @@ import (
 	"errors"
 	"net/url"
 	golangswaggerpaths "path"
+
+	"github.com/go-openapi/swag"
 )
 
 // GetAllPortsURL generates an URL for the get all ports operation
 type GetAllPortsURL struct {
+	Limit int64
+	Skip  int64
+
 	_basePath string
+	// avoid unkeyed usage
+	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
@@ -42,6 +49,20 @@ func (o *GetAllPortsURL) Build() (*url.URL, error) {
 		_basePath = "/api/v1.0"
 	}
 	result.Path = golangswaggerpaths.Join(_basePath, _path)
+
+	qs := make(url.Values)
+
+	limit := swag.FormatInt64(o.Limit)
+	if limit != "" {
+		qs.Set("limit", limit)
+	}
+
+	skip := swag.FormatInt64(o.Skip)
+	if skip != "" {
+		qs.Set("skip", skip)
+	}
+
+	result.RawQuery = qs.Encode()
 
 	return &result, nil
 }

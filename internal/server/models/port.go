@@ -25,7 +25,7 @@ type Port struct {
 	Code string `json:"code,omitempty"`
 
 	// port coordinates
-	Coordinates []float64 `json:"coordinates"`
+	Coordinates []float32 `json:"coordinates"`
 
 	// port country
 	Country string `json:"country,omitempty"`

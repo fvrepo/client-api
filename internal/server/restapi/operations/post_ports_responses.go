@@ -37,6 +37,50 @@ func (o *PostPortsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 	rw.WriteHeader(200)
 }
 
+// PostPortsBadRequestCode is the HTTP code returned for type PostPortsBadRequest
+const PostPortsBadRequestCode int = 400
+
+/*PostPortsBadRequest Bad Argument
+
+swagger:response postPortsBadRequest
+*/
+type PostPortsBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.Error `json:"body,omitempty"`
+}
+
+// NewPostPortsBadRequest creates PostPortsBadRequest with default headers values
+func NewPostPortsBadRequest() *PostPortsBadRequest {
+
+	return &PostPortsBadRequest{}
+}
+
+// WithPayload adds the payload to the post ports bad request response
+func (o *PostPortsBadRequest) WithPayload(payload *models.Error) *PostPortsBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// SetPayload sets the payload to the post ports bad request response
+func (o *PostPortsBadRequest) SetPayload(payload *models.Error) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PostPortsBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // PostPortsInternalServerErrorCode is the HTTP code returned for type PostPortsInternalServerError
 const PostPortsInternalServerErrorCode int = 500
 
