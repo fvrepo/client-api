@@ -18,12 +18,10 @@ import (
 
 //go:generate mockery -case=snake -dir=./../../../vendor/github.com/fvrepo/port-domain/pkg -outpkg=mocks -output=./mocks -name=.*Client -recursive
 
-// todo fix test later
 func TestHandler_PostPorts(t *testing.T) {
-	t.Skip()
 	portDomain := &mocks.PortServiceClient{}
 
-	h := New(config.Config{MaxFileSize: 500000}, portDomain)
+	h := New(config.Config{MaxFileSize: 500000, Workers: 5}, portDomain)
 
 	jsonReq := `
 		{
