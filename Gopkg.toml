@@ -6,7 +6,7 @@ required = [
 ]
 
 [[constraint]]
-  version = "v1.12.5"
+  branch = "master"
   name = "github.com/golangci/golangci-lint"
 
 [[override]]

@@ -31,7 +31,7 @@ GREEN_COLOR   = "\033[0;32m"
 PURPLE_COLOR  = "\033[0;35m"
 DEFAULT_COLOR = "\033[m"
 
-all: clean fmt swagger build
+all: clean fmt swagger build test lint
 
 help:
 	@echo 'Usage: make <TARGETS> ... <OPTIONS>'
@@ -49,7 +49,7 @@ help:
 	@echo '    swaggerdoc         Serve swagger doc'
 	@echo '    generate           Generate mocks'
 	@echo ''
-	@echo 'Targets run by default are: clean fmt swagger build.'
+	@echo 'Targets run by default are: clean fmt swagger build test lint.'
 	@echo ''
 
 clean:
